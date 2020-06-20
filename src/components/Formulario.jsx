@@ -28,8 +28,17 @@ const Formulario = () => {
     const {mascota, propietario, fecha, hora, sintomas} = cita
 
     // Evento submti
-    const submitCita = () => {
-        alert('Ennviando formulario')
+    const submitCita = (e) => {
+        e.preventDefault();
+        alert('Enviando formulario')
+
+        // Validar
+
+        // Asignar ID
+
+        // Crear la cita en el state principal
+
+        // Reiniciar el form
     }
 
     return (
