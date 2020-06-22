@@ -2,99 +2,110 @@ import React, { Fragment, useState } from 'react';
 
 
 const Formulario = () => {
+  // Crear State de citas
 
-    // Crear State de citas
+  const [cita, actualizarCita] = useState({
+    mascota: "",
+    propietario: "",
+    fecha: "",
+    hora: "",
+    sintomas: "",
+  });
 
-    const [cita, actualizarCita] = useState({
-        mascota: '',
-        propietario: '',
-        fecha: '',
-        hora: '',
-        sintomas:''
-    })
+  // state que actualiza si hay un error en el formulario
+  const [error, actualizarError] = useState(false);
 
-    // Funcion que se ejecuta cada vez que un usuario ejecuta un input
-    const actualizarState = e => {
-        // Se usa el segundo parametro pasado en el state, la funcion
-        actualizarCita({
-            // se crea una copia del state cita
-            ...cita,
-            [e.target.name]:e.target.value
-        })
-        
+  // Funcion que se ejecuta cada vez que un usuario ejecuta un input
+  const actualizarState = (e) => {
+    // Se usa el segundo parametro pasado en el state, la funcion
+    actualizarCita({
+      // se crea una copia del state cita y luego se guarda el valor dependiendo del nombre del input
+      ...cita,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Destructuring del state; Extraer los valores para agregar value a input y foormatear el for mas adelante
+  const { mascota, propietario, fecha, hora, sintomas } = cita;
+
+  // Evento submti
+  const submitCita = (e) => {
+    e.preventDefault();
+
+    // Validar
+    if (
+      mascota.trim() === "" ||
+      propietario.trim() ||
+      fecha.trim() ||
+      hora.trim() ||
+      sintomas.trim()
+    ) {
+      actualizarError(true);
+      return;
     }
 
-    // Extraer los valores
-    const {mascota, propietario, fecha, hora, sintomas} = cita
+    // Asignar ID
 
-    // Evento submti
-    const submitCita = (e) => {
-        e.preventDefault();
-        alert('Enviando formulario')
+    // Crear la cita en el state principal
 
-        // Validar
+    // Reiniciar el form
+  };
 
-        // Asignar ID
+  return (
+    <Fragment>
+      <h2>Crear Cita</h2>
 
-        // Crear la cita en el state principal
-
-        // Reiniciar el form
-    }
-
-    return (
-      <Fragment>
-        <h2>Crear Cita</h2>
-
-        <form
-            onSubmit={submitCita}>
-            <label htmlFor="">Nombre Mascota</label>
-            <input 
-                type="text"
-                name="mascota"
-                className="u-full-width"
-                placeholder="Nombre Mascota"
-                onChange={actualizarState}
-                value = {mascota}
-            />
-            <label htmlFor="">Nombre Dueño</label>
-            <input 
-                type="text"
-                name="propietario"
-                className="u-full-width"
-                placeholder="Nombre Dueño"
-                onChange={actualizarState}
-                value = {propietario}
-            />
-            <label htmlFor="">Fecha</label>
-            <input 
-                type="date"
-                name="fecha"
-                className="u-full-width"
-                onChange={actualizarState}
-                value = {fecha}
-            />
-            <label htmlFor="">Hora</label>
-            <input 
-                type="time"
-                name="hora"
-                className="u-full-width"
-                onChange={actualizarState}
-                value = {hora}
-            />
-            <label htmlFor="">Síntomas</label>
-            <textarea 
-                name="sintomas"
-                className="u-full-width"
-                onChange={actualizarState}
-                value = {sintomas}
-            ></textarea>
-            <button
-                type="submit"
-                className="u-full-width button-primary"
-            >Agregar Cita</button>
-        </form>
-      </Fragment>
-    );
-}
+      {error ? (
+        <p className="alerta-error">Todos los campos son obligatorios</p>
+      ) : null}
+      <form onSubmit={submitCita}>
+        <label htmlFor="">Nombre Mascota</label>
+        <input
+          type="text"
+          name="mascota"
+          className="u-full-width"
+          placeholder="Nombre Mascota"
+          onChange={actualizarState}
+          value={mascota}
+        />
+        <label htmlFor="">Nombre Dueño</label>
+        <input
+          type="text"
+          name="propietario"
+          className="u-full-width"
+          placeholder="Nombre Dueño"
+          onChange={actualizarState}
+          value={propietario}
+        />
+        <label htmlFor="">Fecha</label>
+        <input
+          type="date"
+          name="fecha"
+          className="u-full-width"
+          onChange={actualizarState}
+          value={fecha}
+        />
+        <label htmlFor="">Hora</label>
+        <input
+          type="time"
+          name="hora"
+          className="u-full-width"
+          onChange={actualizarState}
+          value={hora}
+        />
+        <label htmlFor="">Síntomas</label>
+        <textarea
+          name="sintomas"
+          className="u-full-width"
+          onChange={actualizarState}
+          value={sintomas}
+        ></textarea>
+        <button type="submit" className="u-full-width button-primary">
+          Agregar Cita
+        </button>
+      </form>
+    </Fragment>
+  );
+};
  
 export default Formulario;
