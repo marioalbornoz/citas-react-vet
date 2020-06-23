@@ -35,17 +35,21 @@ const Formulario = () => {
     // Validar
     if (
       mascota.trim() === "" ||
-      propietario.trim() ||
-      fecha.trim() ||
-      hora.trim() ||
-      sintomas.trim()
+      propietario.trim()=== "" ||
+      fecha.trim()==="" ||
+      hora.trim()==="" ||
+      sintomas.trim()===""
     ) {
       actualizarError(true);
-      return;
+      return;      
+    }
+    else {
+      actualizarError(false);
     }
 
     // Asignar ID
-
+    console.log(cita);
+    
     // Crear la cita en el state principal
 
     // Reiniciar el form
