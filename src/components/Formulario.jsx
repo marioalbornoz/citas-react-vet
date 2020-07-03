@@ -26,7 +26,7 @@ const Formulario = ( {crearCita} ) => {
     });
   };
 
-  // Destructuring del state; Extraer los valores para agregar value a input y foormatear el for mas adelante
+  // Destructuring del state; Extraer los valores para agregar value a input y foormatear el form mas adelante
   const { mascota, propietario, fecha, hora, sintomas } = cita;
 
   // Evento submti
